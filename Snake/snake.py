@@ -1,5 +1,6 @@
 import pygame as pg
 from random import randrange
+from sys import exit
 
 # Constantes
 WINDOW = 500
