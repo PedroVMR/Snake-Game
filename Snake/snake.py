@@ -5,7 +5,7 @@ from sys import exit
 # Constantes
 WINDOW = 500
 TILE_SIZE = 25
-RANGE =  (TILE_SIZE // 2, WINDOW - TILE_SIZE // 2, TILE_SIZE)
+RANGE = (TILE_SIZE // 2, WINDOW - TILE_SIZE // 2, TILE_SIZE)
 
 # Variavéis 
 get_random_position = lambda: [randrange(*RANGE), randrange(*RANGE)]
@@ -32,7 +32,7 @@ score_rect = score_surface.get_rect()
 score_rect.x = 10
 score_rect.y = 10
 
-# Música Aleatoria
+# Música Abençoada
 pg.init()
 pg.mixer.music.load('Pearl Jam - Even Flow.mp3')
 pg.mixer.music.play()
@@ -74,20 +74,22 @@ while True:
         score += 1
         score_surface = score_font.render(f'Score: {score}', True, (255, 255, 255))
         
-    # desenhe o score_surface na tela
+    # Desenha o score_surface na tela
     screen.blit(score_surface, score_rect)
             
     # Desenha a comida
     pg.draw.rect(screen, 'red', food)
     # Desenha a cobra
     [pg.draw.rect(screen, 'green', segment) for segment in segments] 
-    # Mover a cobra e controle de velocidade
+    # Mover a cobra
     time_now = pg.time.get_ticks()
     if time_now - time > time_step:
         time = time_now
         snake.move_ip(snake_dir)
         segments.append(snake.copy())
         segments  = segments[-length:]
+        
+    # Tick 60 fps
     pg.display.flip()
     clock.tick(60)
     
